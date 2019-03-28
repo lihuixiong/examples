@@ -52,3 +52,25 @@ for($x=0;$x<3;$x++){
         }
     }
 }
+
+//水仙花束
+for($y=1;$y<10;$y++){
+    for($z=0;$z<10;$z++){
+        for($x=0;$x<10;$x++){
+            if($y*$y*$y+$z*$z*$z+$x*$x*$x==$y*100+$z*10+$x){
+                echo $y*100+$z*10+$x."\n";
+            }
+        }
+    }
+}
+
+//表格
+echo '<table border=1>';
+for($a=1;$a<=5;$a++){
+    echo '<tr>';
+    for($b=1;$b<=4;$b++){
+        echo '<td>单元格</td>';
+    }
+    echo '</tr>';
+}
+echo '</table>';
