@@ -6,10 +6,14 @@
 // 设置北京时区
 date_default_timezone_set('Asia/Shanghai');
 
+//开启SESSION
+session_start();
+
 // 获取参数
 $name = isset($_POST['name']) ? $_POST['name'] : '';
 $phone = isset($_POST['phone']) ? $_POST['phone'] : '';
 $content = isset($_POST['content']) ? $_POST['content'] : '';
+$captcha = isset($_POST['captcha']) ? $_POST['captcha'] : '';
 $now = date('Y-m-d H:i:s');
 
 // 校验数据
@@ -23,6 +27,16 @@ if (empty($phone)) {
 }
 if (empty($content)) {
     echo '请输入留言内容';
+    return;
+}
+if (empty($captcha)) {
+    echo '请输入验证码';
+    return;
+}
+if (isset($_SESSION['captcha']) && $_SESSION['captcha'] == $captcha) {
+    $_SESSION['captcha'] = null;
+} else {
+    echo '验证码错误';
     return;
 }
 
@@ -61,7 +75,7 @@ $prep->bindParam(':phone', $phone, PDO::PARAM_STR);
 $prep->bindParam(':content', $content, PDO::PARAM_STR);
 $prep->bindParam(':created_at', $now, PDO::PARAM_STR);
 $result = $prep->execute();
-// var_dump($result);
+//var_dump($result);
 
 if ($result) {
     echo '留言成功';

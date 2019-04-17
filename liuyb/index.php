@@ -30,6 +30,9 @@ while (($result = $statement->fetch(PDO::FETCH_ASSOC)) !==false){
         #list ul li {
             padding: 10px 0;
         }
+        #imgCaptcha:hover {
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -40,6 +43,8 @@ while (($result = $statement->fetch(PDO::FETCH_ASSOC)) !==false){
             姓名：<input type="text" name="name"><br>
             电话：<input type="text" name="phone"><br>
             留言：<textarea name="content"></textarea><br>
+            验证码：<input type="text" name="captcha"> <img id="imgCaptcha" src="captcha.php" alt="" onclick="changeCaptcha()">
+            <a href="javascript:;" onclick="changeCaptcha()">看不清，换一张图片</a><br>
             <input type="submit" value="提交">
         </form>
     </div>
@@ -57,5 +62,12 @@ while (($result = $statement->fetch(PDO::FETCH_ASSOC)) !==false){
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+    function changeCaptcha() {
+        var date = new Date();
+        var imgCaptcha = document.getElementById('imgCaptcha');
+        imgCaptcha.src = 'captcha.php?t=' + date.getTime();
+    }
+</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 {
     "require": {
         "nesbot/carbon": "^2.16",
-        "monolog/monolog": "^1.24"
+        "monolog/monolog": "^1.24",
+        "gregwar/captcha": "^1.1"
     }
 }
